@@ -1,0 +1,19 @@
+/* Default setting for album story
+==================================================================== */
+@charset 'UTF-8';
+/* Google fonts */
+@import url(https://fonts.googleapis.com/css?family=Amatic+SC:400,700);
+@import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);
+
+body {
+  width: 100%;
+  height: 100%;
+  font-size: 15px;
+  font-family: 'Amatic SC', cursive;
+  background: #eee;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
