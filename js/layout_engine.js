@@ -27,24 +27,19 @@ var LayoutEngine = (function () {
                       (i == 1)? _createTableSection(_photos[i]) :
                         _createContentSection(_photos[i]);
       _rootNode.appendChild(section);
-
-      // We have a fog picture to cover the underlay photo,
-      // ,so we need to add our own underlay picture here.
-      if (!i) {
-        _setCoverSectionBackground(section, _photos[i]);
-      }
     }
   }
 
   function _createCoverSection(photo) {
-    let sec = _createSectionWithClass(_class.section.cover);
+    let sec = _createSectionWithClass(_class.cover.section);
     sec.id = photo.id;
-    let title = _createTitle(photo.title);
-    let desc = _createDescription(photo.description);
+    let title = _createTitleWithClass(photo.title, _class.cover.title);
+    let desc = _createDescriptionWithClass(photo.description, _class.cover.description);
     sec.appendChild(title);
     sec.appendChild(desc);
     let nextBtn = _createNextButton((photo.id + 1).toString());
     sec.appendChild(nextBtn);
+    _setCoverSectionBackground(sec, photo)
     return sec;
   }
 
@@ -53,25 +48,26 @@ var LayoutEngine = (function () {
   }
 
   function _createContentSection(photo) {
-    let sec = _createSectionWithClass(_class.section.content);
+    let sec = _createSectionWithClass(_class.content.section);
     sec.id = photo.id;
-    let title = _createTitle(photo.title);
-    let desc = _createDescription(photo.description);
+    let title = _createTitleWithClass(photo.title, _class.content.title);
+    let desc = _createDescriptionWithClass(photo.description, _class.content.description);
     sec.appendChild(title);
     sec.appendChild(desc);
     let photoDIV = _createPhotoDIV(photo);
     sec.appendChild(photoDIV);
-    // let nextBtn = _createNextButton();
+    // let nextId = ((photo.id + 1)%(_photos.length)).toString();
+    // let nextBtn = _createNextButton(nextId);
     // sec.appendChild(nextBtn);
     return sec;
   }
 
   function _setCoverSectionBackground(section, photo) {
-    section.style.backgroundImage += 'url(' + photo.source + ')';
-    section.style.backgroundSize += 'cover';
-    section.style.backgroundAttachment += 'fixed';
-    section.style.backgroundPosition += 'center';
-    section.style.backgroundRepeat += 'no-repeat';
+    section.style.backgroundImage = 'url(' + photo.source + ')';
+    section.style.backgroundSize = 'cover';
+    section.style.backgroundAttachment = 'fixed';
+    section.style.backgroundPosition = 'center';
+    section.style.backgroundRepeat = 'no-repeat';
   }
 
   function _createSectionWithClass(className) {
@@ -80,24 +76,24 @@ var LayoutEngine = (function () {
     return section;
   }
 
-  function _createTitle(str) {
+  function _createTitleWithClass(str, className) {
     let title = document.createElement("H1");
-    title.className += _class.title;
+    title.className += className;
     let text = document.createTextNode(str);
     title.appendChild(text);
     return title;
   }
 
-  function _createDescription(str) {
+  function _createDescriptionWithClass(str, className) {
     let para = document.createElement("P");
-    para.className += _class.description;
+    para.className += className;
     let text = document.createTextNode(str);
     para.appendChild(text);
     return para;
   }
 
   function _createPhotoDIV(photo) {
-    let photoDIV = _createDivWithClass(_class.photo);
+    let photoDIV = _createDivWithClass(_class.content.photo);
 
     let imgAnchor = _createAnchorWithClass(photo.source, '_blank');
     let photoImg = _createImage(photo.source);
@@ -115,14 +111,14 @@ var LayoutEngine = (function () {
   }
 
   function _createNextButton(nextId) {
-    let nextAnchor = _createAnchorWithClass('#' + nextId, '_self', 'page-scroll');
-    let nextIcon = '<i class="fa fa-chevron-down"></i>';
+    let nextAnchor = _createAnchorWithClass('#' + nextId, '_self', _class.nextButton.anchor);
+    let nextIcon = '<i class="' + _class.nextButton.icon + '"></i>';
     nextAnchor.innerHTML = nextIcon;
     return nextAnchor;
   }
 
   function _createDate(date) {
-    var dateDIV = _createDivWithClass(_class.date);
+    var dateDIV = _createDivWithClass(_class.content.date);
     var text = document.createTextNode(date);
     dateDIV.appendChild(text);
     return dateDIV;

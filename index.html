@@ -94,44 +94,63 @@
 ================================================== -->
 <script src="js/loader.js"></script>
 <script src="js/layout_engine.js"></script>
-
-<!-- Main program
-================================================== -->
 <script>
-
 function loadPhotos() {
   // Photos from other .js files
   const sources = [
     'js/source.js',
-    'js/source0.js',
-    'js/source1.js',
   ];
   // start loading photos
   let loader = new Loader();
+  // startLayout will be fired after photos are loaded.
   loader.require(sources, startLayout);
 }
 
 function startLayout() {
   // We will create a photo div with the following class in photo.css
   const photoClass = {
-    section: {
-      cover: 'cover',
-      table: 'photowall',
-      content: 'moment',
+    cover : {
+      section : 'cover',
+      title : 'title',
+      description : 'description',
     },
-    title: 'title',
-    description: 'description',
-    photo: 'photo',
-    date: 'date',
+    table : {
+    },
+    content : {
+      section : 'moment',
+      title : 'title',
+      description : 'description',
+      photo : 'photo',
+      date : 'date',
+    },
+    nextButton : {
+      anchor : 'page-scroll',
+      icon : 'fa fa-chevron-down',
+    },
   };
 
-  // var PHOTOS = PHOTOS || [];
-  // PHOTOS will be declared and initialized after all the sources are loaded
-  LayoutEngine.init(photoClass, PHOTOS);
+  // var gPhotos = gPhotos || [];
+  // gPhotos will be declared and initialized after all the sources are loaded
+  LayoutEngine.init(photoClass, gPhotos);
   LayoutEngine.draw();
+
+  addMaskOnCover(photoClass.cover.section, 'images/overlay.png');
 
   // Create animation for page scrolling
   animatePageScrolling();
+}
+
+// Add a mask image on cover page
+function addMaskOnCover(coverClass, coverImage)
+{
+  // Get the cover section
+  let section = document.getElementsByClassName(coverClass)[0];
+  console.log(section);
+  section.style.backgroundImage = 'url(' + coverImage + '), ' + section.style.backgroundImage;
+  section.style.backgroundSize = '256px 256px, ' + section.style.backgroundSize;
+  section.style.backgroundAttachment = 'fixed, ' + section.style.backgroundAttachment;
+  section.style.backgroundPosition = 'top left, ' + section.style.backgroundPosition;
+  section.style.backgroundRepeat = 'repeat, ' + section.style.backgroundRepeat;
 }
 
 
@@ -148,6 +167,7 @@ function animatePageScrolling()
   loader.require(sources, null);
 }
 
+// Start load photos can layout website automatically
 loadPhotos();
 </script>
 

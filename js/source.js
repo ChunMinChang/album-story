@@ -1,8 +1,8 @@
-var PHOTOS = PHOTOS || [];
+var gPhotos = gPhotos || [];
 
 // *NOTE*
 // The id of photo must be unique!
-PHOTOS = PHOTOS.concat([
+gPhotos = gPhotos.concat([
   {
     id: 'dino',
     title: 'Mozilla wallpapers',

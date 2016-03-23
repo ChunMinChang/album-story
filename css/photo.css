@@ -8,11 +8,6 @@
   height:auto;
   padding-top: 150px;
   text-align: center;
-  background-image: url('../images/overlay.png');
-  background-size: 256px 256px;
-	background-attachment: fixed;
-	background-position: top left;
-	background-repeat: repeat;
 }
 
 .cover .title {
