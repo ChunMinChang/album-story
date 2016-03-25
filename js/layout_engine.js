@@ -5,54 +5,73 @@ var LayoutEngine = (function () {
 
   var _rootNode = document.body;
   var _photos;
-  var _class;
+  var _settings;
 
-  function init(classSetting, photos) {
+  function init(settings, photos) {
     console.log('[LayoutEngine] init');
     // Link _photos to the photo exported from sources
     _photos = photos;
-    // Link _class to the used photo class setting in .css files
-    _class = classSetting;
+    // Link _settings to the used photo class setting in .css files
+    _settings = settings;
   }
 
   function draw() {
     console.log('[LayoutEngine] draw!');
-    if (!_class) {
+    if (!_settings) {
       return;
     }
 
     for (let i = 0 ; i < _photos.length ; i++) {
+      // Assign photo id
       _photos[i].id = i;
-      let section = (!i)? _createCoverSection(_photos[i]) :
-                      (i == 1)? _createTableSection(_photos[i]) :
-                        _createContentSection(_photos[i]);
+
+      // Cover and Table
+      if (!i) {
+        // Create a cover
+        let cover = _createCoverSection(_photos[i], _settings.table.id);
+        _rootNode.appendChild(cover);
+        // Create a table of content
+        let table = _createTableSection(_settings.table.id, _settings.table.title, (i + 1).toString());
+        _rootNode.appendChild(table);
+        continue;
+      }
+
+      // Create contents
+      let section = _createContentSection(_photos[i]);
       _rootNode.appendChild(section);
     }
   }
 
-  function _createCoverSection(photo) {
-    let sec = _createSectionWithClass(_class.cover.section);
+  function _createCoverSection(photo, nextId) {
+    let sec = _createSection(_settings.cover.class.section);
     sec.id = photo.id;
-    let title = _createTitleWithClass(photo.title, _class.cover.title);
-    let desc = _createDescriptionWithClass(photo.description, _class.cover.description);
+    let title = _createTitleWithClass(photo.title, _settings.cover.class.title);
     sec.appendChild(title);
+    let desc = _createDescription(photo.description, _settings.cover.class.description);
     sec.appendChild(desc);
-    let nextBtn = _createNextButton((photo.id + 1).toString());
+    nextId = nextId || (photo.id + 1).toString();
+    let nextBtn = _createNextButton(nextId);
     sec.appendChild(nextBtn);
-    _setCoverSectionBackground(sec, photo)
+    _setCoverSectionBackground(sec, photo.source);
     return sec;
   }
 
-  function _createTableSection(photo) {
-    return _createContentSection(photo);
+  function _createTableSection(id, titleStr, nextId) {
+    let sec = _createSection(_settings.table.class.section);
+    sec.id = id;
+    let title = _createTitleWithClass(titleStr, _settings.table.class.title);
+    sec.appendChild(title);
+    let nextBtn = _createNextButton(nextId);
+    sec.appendChild(nextBtn);
+    return sec;
   }
 
   function _createContentSection(photo) {
-    let sec = _createSectionWithClass(_class.content.section);
+    let sec = _createSection(_settings.content.class.section);
     sec.id = photo.id;
-    let title = _createTitleWithClass(photo.title, _class.content.title);
-    let desc = _createDescriptionWithClass(photo.description, _class.content.description);
+    let title = _createTitleWithClass(photo.title, _settings.content.class.title);
     sec.appendChild(title);
+    let desc = _createDescription(photo.description, _settings.content.class.description);
     sec.appendChild(desc);
     let photoDIV = _createPhotoDIV(photo);
     sec.appendChild(photoDIV);
@@ -62,40 +81,26 @@ var LayoutEngine = (function () {
     return sec;
   }
 
-  function _setCoverSectionBackground(section, photo) {
-    section.style.backgroundImage = 'url(' + photo.source + ')';
+  function _setCoverSectionBackground(section, source) {
+    section.style.backgroundImage = 'url(' + source + ')';
     section.style.backgroundSize = 'cover';
     section.style.backgroundAttachment = 'fixed';
     section.style.backgroundPosition = 'center';
     section.style.backgroundRepeat = 'no-repeat';
   }
 
-  function _createSectionWithClass(className) {
-    let section = document.createElement("SECTION");
-    section.className += className;
-    return section;
-  }
-
   function _createTitleWithClass(str, className) {
-    let title = document.createElement("H1");
-    title.className += className;
-    let text = document.createTextNode(str);
-    title.appendChild(text);
-    return title;
+    return _createHeading1(str, className);
   }
 
-  function _createDescriptionWithClass(str, className) {
-    let para = document.createElement("P");
-    para.className += className;
-    let text = document.createTextNode(str);
-    para.appendChild(text);
-    return para;
+  function _createDescription(str, className) {
+    return _createParagraph(str, className);
   }
 
   function _createPhotoDIV(photo) {
-    let photoDIV = _createDivWithClass(_class.content.photo);
+    let photoDIV = _createDiv(_settings.content.class.photo);
 
-    let imgAnchor = _createAnchorWithClass(photo.source, '_blank');
+    let imgAnchor = _createAnchor(photo.source, '_blank');
     let photoImg = _createImage(photo.source);
     imgAnchor.appendChild(photoImg);
     photoDIV.appendChild(imgAnchor);
@@ -111,44 +116,72 @@ var LayoutEngine = (function () {
   }
 
   function _createNextButton(nextId) {
-    let nextAnchor = _createAnchorWithClass('#' + nextId, '_self', _class.nextButton.anchor);
-    let nextIcon = '<i class="' + _class.nextButton.icon + '"></i>';
+    let nextAnchor = _createAnchor('#' + nextId, '_self', _settings.nextButton.class.anchor);
+    let nextIcon = '<i class="' + _settings.nextButton.icon + '"></i>';
     nextAnchor.innerHTML = nextIcon;
     return nextAnchor;
   }
 
   function _createDate(date) {
-    var dateDIV = _createDivWithClass(_class.content.date);
+    var dateDIV = _createDiv(_settings.content.class.date);
     var text = document.createTextNode(date);
     dateDIV.appendChild(text);
     return dateDIV;
   }
 
-  function _createAnchorWithClass(href, target, className) {
+  function _createSection(className) {
+    let section = document.createElement("SECTION");
+    if (className) {
+      section.className = className;
+    }
+    return section;
+  }
+
+  function _createAnchor(href, target, className) {
     let anchor = document.createElement("A");
     anchor.href = href;
-
-    if (target) {
-      anchor.target = target
-    }
-
+    anchor.target = target || '_self';
     if (className) {
-      anchor.className += className;
+      anchor.className = className;
     }
-
     return anchor;
   }
 
-  function _createImage(source) {
+  function _createImage(source, className) {
     let img = document.createElement("IMG");
+    if (className) {
+      img.className = className;
+    }
     img.src = source;
     return img;
   }
 
-  function _createDivWithClass(className) {
+  function _createDiv(className) {
     let div = document.createElement("DIV");
-    div.className += className;
+    if (className) {
+      div.className = className;
+    }
     return div;
+  }
+
+  function _createHeading1(str, className) {
+    let text = document.createTextNode(str);
+    let h1 = document.createElement("H1");
+    if (className) {
+      h1.className = className;
+    }
+    h1.appendChild(text);
+    return h1;
+  }
+
+  function _createParagraph(str, className) {
+    let text = document.createTextNode(str);
+    let p = document.createElement("P");
+    if (className) {
+      p.className = className;
+    }
+    p.appendChild(text);
+    return p;
   }
 
   return {

@@ -66,17 +66,30 @@
 <!-- <section id="page-top" class="cover">
   <h1 class="title">Album Name</h1>
   <p class="description">Description</p>
-  <a href="#Mozilla" class="btn btn-circle page-scroll">
-    <i class="fa fa-angle-double-down animated"></i>
+  <a href="#photo-wall" class="page-scroll">
+    <i class="fa fa-chevron-down"></i>
   </a>
 </section> -->
 
 <!-- photo wall
 ################################################################# -->
+<!-- <section id="photo-wall" class="photowall">
+  <h1 class="title">Photowall</h1>
+  <div class="photowall">
+    <div class="photo">
+      <a href="#1" class="page-scroll">
+        <img src="images/mozilla-wallpaper.jpg">
+      </a>
+    </div>
+  </div>
+  <a href="#demo" class="page-scroll">
+    <i class="fa fa-chevron-down"></i>
+  </a>
+</section> -->
 
 <!-- Photo:
 ################################################################# -->
-<!-- <section id="Mozilla" class="moment">
+<!-- <section id="demo" class="moment">
   <h1 class="title">Title</h1>
   <p class="description">Description</p>
   <div class="photo">
@@ -84,7 +97,7 @@
       <img src="images/mozilla-wallpaper.jpg">
     </a>
     <div class="date">Date</div>
-    <a href="#page-top" class="next page-scroll">
+    <a href="#page-top" class="page-scroll">
       <i class="fa fa-chevron-down"></i>
     </a>
   </div>
@@ -107,34 +120,45 @@ function loadPhotos() {
 }
 
 function startLayout() {
-  // We will create a photo div with the following class in photo.css
-  const photoClass = {
-    cover : {
-      section : 'cover',
-      title : 'title',
-      description : 'description',
+  const settings = {
+    cover: {
+      class: { // cover class in photo.css
+        section: 'cover',
+        title: 'title',
+        description: 'description',
+      },
     },
-    table : {
+    table: { // photowall class in photo.css
+      class: {
+        section: 'photowall',
+        title: 'title',
+      },
+      id: 'photowall',
+      title: 'Photowall'
     },
-    content : {
-      section : 'moment',
-      title : 'title',
-      description : 'description',
-      photo : 'photo',
-      date : 'date',
+    content: { // moment class in photo.css
+      class: {
+        section: 'moment',
+        title: 'title',
+        description: 'description',
+        photo: 'photo',
+        date: 'date',
+      },
     },
-    nextButton : {
-      anchor : 'page-scroll',
-      icon : 'fa fa-chevron-down',
+    nextButton: {
+      class: {
+        anchor: 'page-scroll',
+      },
+      icon: 'fa fa-chevron-down',
     },
   };
 
-  // var gPhotos = gPhotos || [];
-  // gPhotos will be declared and initialized after all the sources are loaded
-  LayoutEngine.init(photoClass, gPhotos);
+  // var PHOTOS = PHOTOS || [];
+  // PHOTOS will be declared and initialized after all the sources are loaded
+  LayoutEngine.init(settings, PHOTOS);
   LayoutEngine.draw();
 
-  addMaskOnCover(photoClass.cover.section, 'images/overlay.png');
+  addMaskOnCover(settings.cover.class.section, 'images/overlay.png');
 
   // Create animation for page scrolling
   animatePageScrolling();
