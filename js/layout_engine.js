@@ -65,6 +65,17 @@ var LayoutEngine = (function () {
     sec.id = id;
     let title = _createTitleWithClass(titleStr, _settings.table.class.title);
     sec.appendChild(title);
+
+    let containerDIV = _createDiv(_settings.table.class.container);
+    // _photos[0] is cover background,
+    // so it's no need to put it  into the table of content
+    for (let i = 1 ; i < _photos.length ; i++) {
+      _photos[i].id = i;
+      let photoDIV = _createPhotoInTable(_photos[i]);
+      containerDIV.appendChild(photoDIV);
+    }
+    sec.appendChild(containerDIV);
+
     let nextBtn = _createNextButton(nextId);
     sec.appendChild(nextBtn);
     return sec;
@@ -73,15 +84,20 @@ var LayoutEngine = (function () {
   function _createContentSection(photo) {
     let sec = _createSection(_settings.content.class.section);
     sec.id = photo.id;
+
     let title = _createTitleWithClass(photo.title, _settings.content.class.title);
     sec.appendChild(title);
+
     let desc = _createDescription(photo.description, _settings.content.class.description);
     sec.appendChild(desc);
+
     let photoDIV = _createPhotoDIV(photo);
     sec.appendChild(photoDIV);
-    // let nextId = ((photo.id + 1)%(_photos.length)).toString();
-    // let nextBtn = _createNextButton(nextId);
-    // sec.appendChild(nextBtn);
+
+    let nextId = ((photo.id + 1)%(_photos.length)).toString();
+    let nextBtn = _createNextButton(nextId);
+    sec.appendChild(nextBtn);
+
     return sec;
   }
 
@@ -101,6 +117,17 @@ var LayoutEngine = (function () {
     return _createParagraph(str, className);
   }
 
+  function _createPhotoInTable(photo) {
+    let photoDIV = _createDiv(_settings.table.class.photo);
+
+    let imgAnchor = _createAnchor('#' + photo.id, '_self',_settings.nextButton.class.anchor);
+    let photoImg = _createImage(photo.source);
+    imgAnchor.appendChild(photoImg);
+    photoDIV.appendChild(imgAnchor);
+
+    return photoDIV;
+  }
+
   function _createPhotoDIV(photo) {
     let photoDIV = _createDiv(_settings.content.class.photo);
 
@@ -112,18 +139,19 @@ var LayoutEngine = (function () {
     let date = _createDate(photo.date);
     photoDIV.appendChild(date);
 
-    let nextId = ((photo.id + 1)%(_photos.length)).toString();
-    let nextBtn = _createNextButton(nextId);
-    photoDIV.appendChild(nextBtn);
-
     return photoDIV;
   }
 
   function _createNextButton(nextId) {
+    let buttonDIV = _createDiv(_settings.nextButton.class.container);
+
     let nextAnchor = _createAnchor('#' + nextId, '_self', _settings.nextButton.class.anchor);
     let nextIcon = '<i class="' + _settings.nextButton.icon + '"></i>';
     nextAnchor.innerHTML = nextIcon;
-    return nextAnchor;
+
+    buttonDIV.appendChild(nextAnchor);
+
+    return buttonDIV;
   }
 
   function _createDate(date) {

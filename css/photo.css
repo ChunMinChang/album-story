@@ -136,3 +136,11 @@ div.photo .date {
   padding-top: 1vh;
   text-align: center;
 }
+
+/* Next bottom
+==================================================================== */
+div.next {
+  text-align: center;
+  /*position:absolute;*/
+  margin-top: 5vh;
+}

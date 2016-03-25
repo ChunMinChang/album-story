@@ -81,8 +81,10 @@
         <img src="images/mozilla-wallpaper.jpg">
       </a>
     </div>
+    <div>
+    </div>
   </div>
-  <a href="#demo" class="page-scroll">
+  <a href="#demo" class="next page-scroll">
     <i class="fa fa-chevron-down"></i>
   </a>
 </section> -->
@@ -97,10 +99,10 @@
       <img src="images/mozilla-wallpaper.jpg">
     </a>
     <div class="date">Date</div>
-    <a href="#page-top" class="page-scroll">
-      <i class="fa fa-chevron-down"></i>
-    </a>
   </div>
+  <a href="#page-top" class="next page-scroll">
+    <i class="fa fa-chevron-down"></i>
+  </a>
 </section> -->
 
 <!-- Core Javascript for album story
@@ -132,6 +134,8 @@ function startLayout() {
       class: {
         section: 'photowall',
         title: 'title',
+        container: 'photowall',
+        photo: 'photo',
       },
       title: 'Photowall'
     },
@@ -146,6 +150,7 @@ function startLayout() {
     },
     nextButton: {
       class: {
+        container: 'next',
         anchor: 'page-scroll',
       },
       icon: 'fa fa-chevron-down',
