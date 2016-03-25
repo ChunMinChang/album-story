@@ -27,12 +27,16 @@ var LayoutEngine = (function () {
 
       // Cover and Table
       if (!i) {
+        let tableId = (_settings.table)? (_photos.length).toString() : null;
         // Create a cover
-        let cover = _createCoverSection(_photos[i], _settings.table.id);
+        let cover = _createCoverSection(_photos[i], tableId);
         _rootNode.appendChild(cover);
         // Create a table of content
-        let table = _createTableSection(_settings.table.id, _settings.table.title, (i + 1).toString());
-        _rootNode.appendChild(table);
+        if (_settings.table) {
+          let nextId = (i + 1).toString();
+          let table = _createTableSection(tableId, _settings.table.title, nextId);
+          _rootNode.appendChild(table);
+        }
         continue;
       }
 
