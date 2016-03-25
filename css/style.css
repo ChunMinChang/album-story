@@ -2,8 +2,9 @@
 ==================================================================== */
 @charset 'UTF-8';
 /* Google fonts */
-@import url(https://fonts.googleapis.com/css?family=Amatic+SC:400,700);
-@import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);
+/*@import url(https://fonts.googleapis.com/css?family=Amatic+SC:400,700);
+@import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);*/
+/* the font above will be imported from photo.css */
 
 body {
   width: 100%;

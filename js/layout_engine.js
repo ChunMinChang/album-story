@@ -68,7 +68,7 @@ var LayoutEngine = (function () {
 
     let containerDIV = _createDiv(_settings.table.class.container);
     // _photos[0] is cover background,
-    // so it's no need to put it  into the table of content
+    // so it's no need to put it into the table of content
     for (let i = 1 ; i < _photos.length ; i++) {
       _photos[i].id = i;
       let photoDIV = _createPhotoInTable(_photos[i]);
@@ -120,7 +120,7 @@ var LayoutEngine = (function () {
   function _createPhotoInTable(photo) {
     let photoDIV = _createDiv(_settings.table.class.photo);
 
-    let imgAnchor = _createAnchor('#' + photo.id, '_self',_settings.nextButton.class.anchor);
+    let imgAnchor = _createAnchor('#' + photo.id, '_self', _settings.nextButton.class.scroll);
     let photoImg = _createImage(photo.source);
     imgAnchor.appendChild(photoImg);
     photoDIV.appendChild(imgAnchor);
@@ -145,7 +145,7 @@ var LayoutEngine = (function () {
   function _createNextButton(nextId) {
     let buttonDIV = _createDiv(_settings.nextButton.class.container);
 
-    let nextAnchor = _createAnchor('#' + nextId, '_self', _settings.nextButton.class.anchor);
+    let nextAnchor = _createAnchor('#' + nextId, '_self', _settings.nextButton.class.anchor + ' ' + _settings.nextButton.class.scroll);
     let nextIcon = '<i class="' + _settings.nextButton.icon + '"></i>';
     nextAnchor.innerHTML = nextIcon;
 

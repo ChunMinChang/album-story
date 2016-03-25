@@ -66,9 +66,11 @@
 <!-- <section id="page-top" class="cover">
   <h1 class="title">Album Name</h1>
   <p class="description">Description</p>
-  <a href="#photo-wall" class="page-scroll">
-    <i class="fa fa-chevron-down"></i>
-  </a>
+  <div class="next">
+    <a href="#photo-wall" class="circle page-scroll">
+      <i class="fa fa-chevron-down"></i>
+    </a>
+  </div>
 </section> -->
 
 <!-- photo wall
@@ -84,15 +86,16 @@
     <div>
     </div>
   </div>
-  <a href="#demo" class="next page-scroll">
-    <i class="fa fa-chevron-down"></i>
-  </a>
+  <div class="next">
+    <a href="#demo" class="circle page-scroll">
+      <i class="fa fa-chevron-down"></i>
+    </a>
+  </div>
 </section> -->
 
 <!-- Photo:
 ################################################################# -->
 <!-- <section id="demo" class="moment">
-  <div class="container">
   <h1 class="title">Title</h1>
   <p class="description">Description</p>
   <div class="photo">
@@ -101,12 +104,11 @@
     </a>
     <div class="date">Date</div>
   </div>
-</div>
-  <div class="container">
-  <a href="#page-top" class="next page-scroll">
-    <i class="fa fa-chevron-down"></i>
-  </a>
-</div>
+  <div class="next">
+    <a href="#page-top" class="circle page-scroll">
+      <i class="fa fa-chevron-down"></i>
+    </a>
+  </div>
 </section> -->
 
 <!-- Core Javascript for album story
@@ -155,7 +157,8 @@ function startLayout() {
     nextButton: {
       class: {
         container: 'next',
-        anchor: 'page-scroll',
+        scroll: 'page-scroll',
+        anchor: 'circle',
       },
       icon: 'fa fa-chevron-down',
     },
