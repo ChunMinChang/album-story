@@ -6,9 +6,10 @@ var LayoutEngine = (function () {
   var _rootNode = document.body;
   var _photos;
   var _settings;
+  var _debug = false;
 
   function init(settings, photos) {
-    console.log('[LayoutEngine] init');
+    _log('init');
     // Link _photos to the photo exported from sources
     _photos = photos;
     // Link _settings to the used photo class setting in .css files
@@ -16,7 +17,7 @@ var LayoutEngine = (function () {
   }
 
   function draw() {
-    console.log('[LayoutEngine] draw!');
+    _log('draw!');
     if (!_settings) {
       return;
     }
@@ -25,18 +26,27 @@ var LayoutEngine = (function () {
       // Assign photo id
       _photos[i].id = i;
 
-      // Cover and Table
+      // Generate Cover and Table
       if (!i) {
-        let tableId = (_settings.table)? (_photos.length).toString() : null;
+        // If there is no table needed to be generated
+        if (!_settings.table) {
+          let cover = _createCoverSection(_photos[i]);
+          _rootNode.appendChild(cover);
+          continue;
+        }
+
+        // Otherwise, we need to generate a table for our content
+        let tableId = (_photos.length).toString();
+
         // Create a cover
         let cover = _createCoverSection(_photos[i], tableId);
         _rootNode.appendChild(cover);
+
         // Create a table of content
-        if (_settings.table) {
-          let nextId = (i + 1).toString();
-          let table = _createTableSection(tableId, _settings.table.title, nextId);
-          _rootNode.appendChild(table);
-        }
+        let nextId = (i + 1).toString();
+        let table = _createTableSection(tableId, _settings.table.title, nextId);
+        _rootNode.appendChild(table);
+
         continue;
       }
 
@@ -60,10 +70,10 @@ var LayoutEngine = (function () {
     return sec;
   }
 
-  function _createTableSection(id, titleStr, nextId) {
+  function _createTableSection(id, name, nextId) {
     let sec = _createSection(_settings.table.class.section);
     sec.id = id;
-    let title = _createTitleWithClass(titleStr, _settings.table.class.title);
+    let title = _createTitleWithClass(name, _settings.table.class.title);
     sec.appendChild(title);
 
     let containerDIV = _createDiv(_settings.table.class.container);
@@ -91,7 +101,7 @@ var LayoutEngine = (function () {
     let desc = _createDescription(photo.description, _settings.content.class.description);
     sec.appendChild(desc);
 
-    let photoDIV = _createPhotoDIV(photo);
+    let photoDIV = _createPhotoContent(photo);
     sec.appendChild(photoDIV);
 
     let nextId = ((photo.id + 1)%(_photos.length)).toString();
@@ -99,6 +109,9 @@ var LayoutEngine = (function () {
     sec.appendChild(nextBtn);
 
     return sec;
+  }
+
+  function _insertPhotoToMenu(id ,title) {
   }
 
   function _setCoverSectionBackground(section, source) {
@@ -120,7 +133,7 @@ var LayoutEngine = (function () {
   function _createPhotoInTable(photo) {
     let photoDIV = _createDiv(_settings.table.class.photo);
 
-    let imgAnchor = _createAnchor('#' + photo.id, '_self', _settings.nextButton.class.scroll);
+    let imgAnchor = _createAnchor('#' + photo.id, '_self', _settings.bootstrap.scroll);
     let photoImg = _createImage(photo.source);
     imgAnchor.appendChild(photoImg);
     photoDIV.appendChild(imgAnchor);
@@ -128,7 +141,7 @@ var LayoutEngine = (function () {
     return photoDIV;
   }
 
-  function _createPhotoDIV(photo) {
+  function _createPhotoContent(photo) {
     let photoDIV = _createDiv(_settings.content.class.photo);
 
     let imgAnchor = _createAnchor(photo.source, '_blank');
@@ -145,9 +158,8 @@ var LayoutEngine = (function () {
   function _createNextButton(nextId) {
     let buttonDIV = _createDiv(_settings.nextButton.class.container);
 
-    let nextAnchor = _createAnchor('#' + nextId, '_self', _settings.nextButton.class.anchor + ' ' + _settings.nextButton.class.scroll);
-    let nextIcon = '<i class="' + _settings.nextButton.icon + '"></i>';
-    nextAnchor.innerHTML = nextIcon;
+    let nextAnchor = _createAnchor('#' + nextId, '_self', _settings.nextButton.class.anchor + ' ' + _settings.bootstrap.scroll);
+    nextAnchor.innerHTML = _settings.nextButton.iconHTML;
 
     buttonDIV.appendChild(nextAnchor);
 
@@ -214,6 +226,10 @@ var LayoutEngine = (function () {
     }
     p.appendChild(text);
     return p;
+  }
+
+  function _log(msg) {
+    _debug && console.log('[LayoutEngine] ' + msg);
   }
 
   return {

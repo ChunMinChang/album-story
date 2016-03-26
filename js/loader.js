@@ -9,6 +9,7 @@ Loader.prototype = {
   _scripts: [],
   _callback: null,
   _count: 0,
+  _debug: false,
 
   require: function(scripts, callback) {
     this._scripts = scripts;
@@ -21,7 +22,7 @@ Loader.prototype = {
   },
 
   _writeScript: function(source) {
-    console.log('[Loader] _writeScript: ' + source);
+    this._log('_writeScript: ' + source);
     let script = document.createElement('script');
     script.type = 'text/javascript';
     script.async = true;
@@ -33,12 +34,16 @@ Loader.prototype = {
   _loaded: function(event) {
     // Do nothing if there is file needed to be loaded
     ++this._count;
-    console.log('[Loader] _loaded: ' + this._count);
+    this._log('_loaded: ' + this._count);
     if (this._count != this._scripts.length ||
         typeof this._callback != 'function') {
       return;
     }
 
     this._callback();
+  },
+
+  _log: function(msg) {
+    this._debug && console.log('[Loader] ' + msg);
   },
 }
