@@ -177,6 +177,7 @@ function startLayout() {
   LayoutEngine.init(settings, PHOTOS);
   LayoutEngine.draw();
 
+  // To make the title words on cover clear, we matte finish the cover photo
   addMaskOnCover(settings.cover.class.section, 'images/overlay.png');
 
   // Create animation for page scrolling
@@ -194,7 +195,6 @@ function addMaskOnCover(coverClass, coverImage)
   section.style.backgroundPosition = 'top left, ' + section.style.backgroundPosition;
   section.style.backgroundRepeat = 'repeat, ' + section.style.backgroundRepeat;
 }
-
 
 // Custom scrolling feature for Navigation Bar and page-scroll
 function animatePageScrolling()
