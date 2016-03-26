@@ -108,10 +108,20 @@ var LayoutEngine = (function () {
     let nextBtn = _createNextButton(nextId);
     sec.appendChild(nextBtn);
 
+    if (photo.inList) {
+      _insertPhotoToMenu(photo.id ,photo.title);
+    }
+
     return sec;
   }
 
   function _insertPhotoToMenu(id ,title) {
+    if (_settings.bootstrap && _settings.bootstrap.menu && _settings.bootstrap.itemHTML) {
+      let menu = document.getElementsByClassName(_settings.bootstrap.menu)[0];
+      let itemHTML = _settings.bootstrap.itemHTML.sample.replace(_settings.bootstrap.itemHTML.link, id.toString());
+      itemHTML = itemHTML.replace(_settings.bootstrap.itemHTML.name, title);
+      menu.innerHTML += itemHTML;
+    }
   }
 
   function _setCoverSectionBackground(section, source) {

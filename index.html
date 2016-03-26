@@ -48,7 +48,7 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Moments<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a class="page-scroll" href="#1">1</a></li>
+            <li><a class="page-scroll" href="#demo">Title</a></li>
           </ul>
         </li>
       </ul>
@@ -129,7 +129,11 @@ function startLayout() {
   const bootstrap = {
     scroll: 'page-scroll',
     menu: 'dropdown-menu',
-    itemHTML: '<li><a class="page-scroll" href="#HASH">NAME</a></li>',
+    itemHTML: {
+      sample: '<li><a class="page-scroll" href="#HASHTAG">NAME</a></li>',
+      link: 'HASHTAG',
+      name: 'NAME',
+    },
   };
 
   const settings = {

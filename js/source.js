@@ -20,6 +20,7 @@ PHOTOS = PHOTOS.concat([
     source: 'images/mozilla-wallpaper2.jpg',
     date: '20160301',
     description: 'Doing good is part of our code',
+    inList: true,
   },
   {
     title: 'Mozilla Wallpaper 3',
@@ -32,12 +33,14 @@ PHOTOS = PHOTOS.concat([
     source: 'images/mozilla-dino-wallpaper.png',
     date: '20160301',
     description: 'Welcome to download our following wallpapers',
+    inList: true,
   },
   {
     title: 'Don\'t put the code on ice',
     source: 'images/mozilla-wallpaper.jpg',
     date: '20160301',
     description: 'Always keep in mind',
+    inList: true,
   },
   {
     title: 'You must taste it',
@@ -68,6 +71,7 @@ PHOTOS = PHOTOS.concat([
     source: 'images/mozilla-wallpaper2.jpg',
     date: '20160301',
     description: 'Doing good is part of our code',
+    inList: true,
   },
   {
     title: 'Mozilla Wallpaper 3',
