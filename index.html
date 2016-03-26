@@ -50,7 +50,7 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Moments<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a class="page-scroll" href="#demo">Title</a></li>
+            <!-- <li><a class="page-scroll" href="#demo">Title</a></li> -->
           </ul>
         </li>
       </ul>
@@ -191,11 +191,16 @@ function addMaskOnCover(coverClass, coverImage)
 {
   // Get the cover section
   let section = document.getElementsByClassName(coverClass)[0];
-  section.style.backgroundImage = 'url(' + coverImage + '), ' + section.style.backgroundImage;
-  section.style.backgroundSize = '256px 256px, ' + section.style.backgroundSize;
-  section.style.backgroundAttachment = 'fixed, ' + section.style.backgroundAttachment;
-  section.style.backgroundPosition = 'top left, ' + section.style.backgroundPosition;
-  section.style.backgroundRepeat = 'repeat, ' + section.style.backgroundRepeat;
+  section.style.backgroundImage = 'url(' + coverImage + '), ' +
+                                  section.style.backgroundImage;
+  section.style.backgroundSize = '256px 256px, ' +
+                                 section.style.backgroundSize;
+  section.style.backgroundAttachment = 'fixed, ' +
+                                       section.style.backgroundAttachment;
+  section.style.backgroundPosition = 'top left, ' +
+                                     section.style.backgroundPosition;
+  section.style.backgroundRepeat = 'repeat, ' +
+                                   section.style.backgroundRepeat;
 }
 
 // Custom scrolling feature for Navigation Bar and page-scroll
@@ -212,16 +217,19 @@ function animatePageScrolling()
   loader.require(sources, null);
 }
 
-// Start load photos can layout website automatically
+// Start loading photos can layout website automatically
 loadPhotos();
 </script>
 
-<!-- Bootsrap Core Javascript
+<!-- Bootsrap Core Javascript:
        Placed at the end of document so the page will be loaded faster
 ================================================== -->
-<!-- Include jquery: This must be placed in front of bootstrap.min.js -->
+<!-- Include jquery:
+       This must be placed in front of bootstrap.min.js
+       because bootstrap need jQuery -->
 <script src="js/jquery-1.12.2.min.js"></script>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+
 <!-- Latest compiled and minified JavaScript -->
 <script src="bootstrap-3.3.6/js/bootstrap.min.js"></script>
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"

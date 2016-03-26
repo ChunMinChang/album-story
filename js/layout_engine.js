@@ -61,7 +61,8 @@ var LayoutEngine = (function () {
     sec.id = photo.id;
     let title = _createTitleWithClass(photo.title, _settings.cover.class.title);
     sec.appendChild(title);
-    let desc = _createDescription(photo.description, _settings.cover.class.description);
+    let desc = _createDescription(photo.description,
+                                  _settings.cover.class.description);
     sec.appendChild(desc);
     nextId = nextId || (photo.id + 1).toString();
     let nextBtn = _createNextButton(nextId);
@@ -95,10 +96,12 @@ var LayoutEngine = (function () {
     let sec = _createSection(_settings.content.class.section);
     sec.id = photo.id;
 
-    let title = _createTitleWithClass(photo.title, _settings.content.class.title);
+    let title = _createTitleWithClass(photo.title,
+                                      _settings.content.class.title);
     sec.appendChild(title);
 
-    let desc = _createDescription(photo.description, _settings.content.class.description);
+    let desc = _createDescription(photo.description,
+                                  _settings.content.class.description);
     sec.appendChild(desc);
 
     let photoDIV = _createPhotoContent(photo);
@@ -116,9 +119,12 @@ var LayoutEngine = (function () {
   }
 
   function _insertPhotoToMenu(id ,title) {
-    if (_settings.bootstrap && _settings.bootstrap.menu && _settings.bootstrap.itemHTML) {
+    if (_settings.bootstrap &&
+        _settings.bootstrap.menu &&
+        _settings.bootstrap.itemHTML) {
       let menu = document.getElementsByClassName(_settings.bootstrap.menu)[0];
-      let itemHTML = _settings.bootstrap.itemHTML.sample.replace(_settings.bootstrap.itemHTML.link, id.toString());
+      let itemHTML = _settings.bootstrap.itemHTML.sample.replace(
+        _settings.bootstrap.itemHTML.link, id.toString());
       itemHTML = itemHTML.replace(_settings.bootstrap.itemHTML.name, title);
       menu.innerHTML += itemHTML;
     }
@@ -142,8 +148,8 @@ var LayoutEngine = (function () {
 
   function _createPhotoInTable(photo) {
     let photoDIV = _createDiv(_settings.table.class.photo);
-
-    let imgAnchor = _createAnchor('#' + photo.id, '_self', _settings.bootstrap.scroll);
+    let imgAnchor = _createAnchor('#' + photo.id, '_self',
+                                  _settings.bootstrap.scroll);
     let photoImg = _createImage(photo.source);
     imgAnchor.appendChild(photoImg);
     photoDIV.appendChild(imgAnchor);
@@ -157,6 +163,7 @@ var LayoutEngine = (function () {
     let imgAnchor = _createAnchor(photo.source, '_blank');
     let photoImg = _createImage(photo.source);
     imgAnchor.appendChild(photoImg);
+    
     photoDIV.appendChild(imgAnchor);
 
     let date = _createDate(photo.date);
@@ -167,10 +174,10 @@ var LayoutEngine = (function () {
 
   function _createNextButton(nextId) {
     let buttonDIV = _createDiv(_settings.nextButton.class.container);
-
-    let nextAnchor = _createAnchor('#' + nextId, '_self', _settings.nextButton.class.anchor + ' ' + _settings.bootstrap.scroll);
+    let nextAnchor = _createAnchor('#' + nextId, '_self',
+                                   _settings.nextButton.class.anchor +
+                                   ' ' + _settings.bootstrap.scroll);
     nextAnchor.innerHTML = _settings.nextButton.iconHTML;
-
     buttonDIV.appendChild(nextAnchor);
 
     return buttonDIV;

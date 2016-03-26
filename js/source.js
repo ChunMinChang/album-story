@@ -1,7 +1,5 @@
 var PHOTOS = PHOTOS || [];
 
-// *NOTE*
-// The id of photo must be unique!
 PHOTOS = PHOTOS.concat([
   {
     title: 'Mozilla wallpapers',
