@@ -1,0 +1,176 @@
+/* Google fonts */
+@import url(https://fonts.googleapis.com/css?family=Amatic+SC:400,700);
+@import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);
+
+/* Sections setting for album story
+==================================================================== */
+
+/* cover section
+-------------------------------------------------- */
+section.cover {
+  min-height: 100%;
+  height:auto;
+  padding-top: 150px;
+  text-align: center;
+}
+
+section.cover .title {
+  text-transform: uppercase;
+  font-weight:bold;
+  color: white;
+  font-size: 5.5em;
+	letter-spacing: 2px;
+	line-height: 1.25em;
+  text-decoration: none;
+  font-family: 'Amatic SC', cursive;
+}
+
+section.cover .description {
+  text-transform: uppercase;
+  font-weight:lighter;
+  color: white;
+  font-size: 3em;
+	letter-spacing: 5px;
+	line-height: 2em;
+  text-decoration: none;
+  font-family: 'Amatic SC', cursive;
+}
+
+/* photowall section
+-------------------------------------------------- */
+section.photowall {
+  min-height: 100%;
+  height: auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  text-align: center;
+}
+
+section.photowall .title {
+  text-transform: uppercase;
+  font-weight:bold;
+  color: black;
+  font-size: 3.5em;
+	letter-spacing: 4px;
+	line-height: 1.25em;
+  text-decoration: none;
+  font-family: 'Amatic SC', cursive;
+}
+
+
+/* moment section
+-------------------------------------------------- */
+section.moment {
+  min-height: 100%;
+  height: auto;
+  padding-top: 50px;
+  padding-bottom: 0px;
+  text-align: center;
+}
+
+section.moment .title {
+  text-transform: uppercase;
+  font-weight:bold;
+  color: black;
+  font-size: 3.5em;
+	letter-spacing: 4px;
+	line-height: 1.25em;
+  text-decoration: none;
+  font-family: 'Amatic SC', cursive;
+}
+
+section.moment .description {
+  color: black;
+  font-size: 1.5em;
+	letter-spacing: 2px;
+	line-height: 0.75em;
+  text-decoration: none;
+  /*font-family: 'Amatic SC', cursive;*/
+  font-family: 'Shadows Into Light', cursive;
+}
+
+/*section.moment .next {
+  margin-top: 0px;
+  padding-top: 0px;
+  font-size: 2em;
+}*/
+
+
+/* Photo for album story
+==================================================================== */
+/* photowall
+-------------------------------------------------- */
+div.photowall {
+  margin-left:5vw;
+  margin-right:5vw;
+}
+
+div.photowall .photo {
+  margin: 2px;
+  /*float: left;*/
+  display: inline-block;
+  height: 10vh;
+}
+
+div.photowall .photo:hover {
+}
+
+div.photowall .photo img {
+  width: auto;
+  height: 100%;
+}
+
+
+/* photo in moment section
+-------------------------------------------------- */
+div.photo {
+  margin-left:auto;
+  margin-right:auto;
+  height: 60vh;
+}
+
+div.photo:hover {
+}
+
+div.photo img {
+  width: auto;
+  height: 100%;
+}
+
+div.photo .date {
+  padding-top: 1vh;
+  text-align: center;
+}
+
+/* Next bottom
+==================================================================== */
+div.next {
+  text-align: center;
+  /*position:absolute;*/
+  margin-top: 5vh;
+}
+
+.circle {
+  margin: auto;
+  display:block;
+  width: 70px;
+  height: 70px;
+  /*margin-top: 50px;*/
+  padding: 7px 16px;
+  border: 2px solid #ffffff;
+  border-radius: 100%;
+  font-size: 35px;
+  color: #ffffff;
+  background: 0 0;
+  -webkit-transition: background .3s ease-in-out;
+  -moz-transition: background .3s ease-in-out;
+  transition: background .3s ease-in-out;
+}
+
+.circle:hover,
+.circle:focus {
+  outline: 0;
+  color: #fff;
+  border-color: #fff;
+  background: rgba(255,255,255,.3);
+}

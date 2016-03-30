@@ -1,0 +1,80 @@
+/* Navigation Bar
+==================================================================== */
+/**
+ * Default Setting
+ */
+.navbar-custom {
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(255,255,255,.3);
+  text-transform: uppercase;
+  background-color: #fff;
+}
+
+/**
+ * Adjust by screen-size
+ */
+@media(min-width:767px) {
+  .navbar-custom {
+    padding: 20px 0;
+    border-bottom: 0;
+    letter-spacing: 1px;
+    background: 0 0;
+    -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+    -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+    transition: background .5s ease-in-out,padding .5s ease-in-out;
+  }
+
+  .navbar-custom.top-nav-collapse {
+    padding: 0;
+    border-bottom: 1px solid rgba(255,255,255,.3);
+    background: #fff;
+  }
+
+  .navbar-custom.top-nav-collapse a {
+    color: #444;
+  }
+}
+
+/**
+ * Default text-color
+ */
+.navbar-custom a {
+  color: #ffffff;
+}
+
+/**
+ * text-color when mouse hover it
+ */
+.navbar-custom .nav li a {
+  -webkit-transition: background .3s ease-in-out;
+  -moz-transition: background .3s ease-in-out;
+  transition: background .3s ease-in-out;
+}
+
+.navbar-custom .nav li a:hover {
+  outline: 0;
+  color: rgba(200,200,200,.8);
+  background-color: transparent;
+}
+
+/**
+ * text-color and background when navigating
+ */
+.navbar-custom .nav li a:focus,
+.navbar-custom .nav li a:active {
+  outline: 0;
+  background-color: transparent;
+}
+
+.navbar-custom .nav li.active {
+  outline: 0;
+}
+
+.navbar-custom .nav li.active a {
+  color: #fff;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.navbar-custom .nav li.active a:hover {
+  color: #000;
+}
